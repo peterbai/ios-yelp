@@ -209,7 +209,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"selected section: %d, row: %d", indexPath.section, indexPath.row);
+    NSLog(@"selected section: %ld, row: %ld", (long)indexPath.section, (long)indexPath.row);
 
     if (indexPath.section == FilterSectionDistance) {
         if (!self.distanceExpanded) {
@@ -255,7 +255,7 @@
 
 - (void)switchCell:(SwitchCell *)cell didUpdateValue:(BOOL)value {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSLog(@"switch changed for section: %d, row: %d to value: %hhd", indexPath.section, indexPath.row, value);
+    NSLog(@"switch changed for section: %ld, row: %ld to value: %hhd", (long)indexPath.section, (long)indexPath.row, (char)value);
 
     if (indexPath.section == FilterSectionCategories) {
         if (value) {
@@ -281,7 +281,7 @@
 
 - (void)checkboxCell:(CheckboxCell *)cell didUpdateValue:(BOOL)value {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSLog(@"checkbox changed for section: %d, row: %d to value: %hhd", indexPath.section, indexPath.row, value);
+//    NSLog(@"checkbox changed for section: %ld, row: %ld to value: %hhd", (long)indexPath.section, (long)indexPath.row, value);
     
     if (indexPath.section == FilterSectionDistance) {
         if (value) {

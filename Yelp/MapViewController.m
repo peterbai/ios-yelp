@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "FiltersViewController.h"
 
-@interface MapViewController () <MKMapViewDelegate, UISearchBarDelegate>
+@interface MapViewController () <MKMapViewDelegate, UISearchBarDelegate, FiltersViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -108,6 +108,13 @@
     DetailViewController *dvc = [[DetailViewController alloc] init];
     dvc.business = business;
     [self.navigationController pushViewController:dvc animated:YES];
+}
+
+#pragma mark FiltersViewControllerDelegate methods
+
+- (void)filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
+    NSLog(@"mapviewcontroller received method call from filtersviewcontroller");
+    [self.delegate mapViewController:self search:@"Restaurants" inRegion:self.mapView.region];
 }
 
 #pragma mark Searchbar delegate methods

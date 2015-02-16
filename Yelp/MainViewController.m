@@ -184,6 +184,7 @@ UIGestureRecognizerDelegate>
 #pragma mark MapViewDelegate methods
 
 - (void)mapViewController:(MapViewController *)mvc search:(NSString *)query inRegion:(MKCoordinateRegion)region {
+    NSLog(@"Mapviewcontroller called for search");
     [self fetchBusinessesWithQuery:query params:nil];
 }
 
@@ -330,9 +331,8 @@ UIGestureRecognizerDelegate>
 #pragma mark Gesture methods
 
 - (IBAction)onPanGesture:(UIPanGestureRecognizer *)sender {
-    CGPoint location = [sender translationInView:self.tableView];
-    
-    NSLog(@"pan location: %f, %f", location.x, location.y);
+//    CGPoint location = [sender translationInView:self.tableView];    
+//    NSLog(@"pan location: %f, %f", location.x, location.y);
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
