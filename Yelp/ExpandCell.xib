@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ExpandCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JX-wk-33D">
+                        <rect key="frame" x="14" y="11" width="104" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIN-w7-7G6">
+                        <rect key="frame" x="274" y="6" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="32" id="l5W-xI-Ipy"/>
+                            <constraint firstAttribute="height" constant="32" id="sa0-YJ-bMH"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oT7-bK-iqf"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="7JX-wk-33D" secondAttribute="centerY" id="6aN-RS-gWP"/>
+                    <constraint firstAttribute="trailing" secondItem="HIN-w7-7G6" secondAttribute="trailing" constant="14" id="CO0-j9-gHK"/>
+                    <constraint firstAttribute="bottom" secondItem="HIN-w7-7G6" secondAttribute="bottom" priority="750" constant="6" id="M5y-df-r3h"/>
+                    <constraint firstItem="HIN-w7-7G6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="750" constant="6" id="ZbQ-5d-w0r"/>
+                    <constraint firstItem="7JX-wk-33D" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="zRr-u3-wNI"/>
+                    <constraint firstAttribute="centerY" secondItem="HIN-w7-7G6" secondAttribute="centerY" id="zrv-vM-9HF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="expandButton" destination="HIN-w7-7G6" id="X5R-5l-Ty0"/>
+                <outlet property="titleLabel" destination="7JX-wk-33D" id="q2z-Rb-3gP"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

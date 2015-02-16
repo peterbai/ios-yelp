@@ -1,0 +1,6 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/BDBOAuth1Manager" "${PODS_ROOT}/Headers/Public/FXBlurView" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/SVPullToRefresh" "${PODS_ROOT}/Headers/Public/SevenSwitch" "${PODS_ROOT}/Headers/Public/VCTransitionsLibrary"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/BDBOAuth1Manager" -isystem "${PODS_ROOT}/Headers/Public/FXBlurView" -isystem "${PODS_ROOT}/Headers/Public/SVProgressHUD" -isystem "${PODS_ROOT}/Headers/Public/SVPullToRefresh" -isystem "${PODS_ROOT}/Headers/Public/SevenSwitch" -isystem "${PODS_ROOT}/Headers/Public/VCTransitionsLibrary"
+OTHER_LDFLAGS = -ObjC -l"Pods-AFNetworking" -l"Pods-BDBOAuth1Manager" -l"Pods-FXBlurView" -l"Pods-SVProgressHUD" -l"Pods-SVPullToRefresh" -l"Pods-SevenSwitch" -l"Pods-VCTransitionsLibrary" -framework "Accelerate" -framework "CoreGraphics" -framework "MobileCoreServices" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
+OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+PODS_ROOT = ${SRCROOT}/Pods
