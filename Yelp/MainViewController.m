@@ -293,7 +293,7 @@ UIGestureRecognizerDelegate>
     [allParameters addEntriesFromDictionary:params];
 
     NSDictionary *limitAndOffset = @{@"limit": @20,
-                                     @"offset": [NSNumber numberWithInt:self.offset]};
+                                     @"offset": [NSNumber numberWithInt:(int)self.offset]};
     [allParameters addEntriesFromDictionary:limitAndOffset];
 
     [self fetchBusinessesWithQuery:query params:allParameters showProgress:NO append:YES];

@@ -80,6 +80,18 @@
     
     NSData *selectedCategoriesData = [defaults objectForKey:@"filtersSelectedCategories"];
     self.selectedCategories = [NSKeyedUnarchiver unarchiveObjectWithData:selectedCategoriesData];
+    // NSLog(@"after loading defaults:\nofferingDeal: %hhd\nselectedDistance: %@\n,selectedSortMethod: %@\nselectedCategories: %@", (char)self.offeringDeal, self.selectedDistance, self.selectedSortMethod, self.selectedCategories);
+    
+    // Set default values
+    if (!self.selectedDistance) {
+        self.selectedDistance = self.distances[0];
+    }
+    if (!self.selectedSortMethod) {
+        self.selectedSortMethod = self.sortMethods[0];
+    }
+    if (!self.selectedCategories) {
+        self.selectedCategories = [NSMutableSet set];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
