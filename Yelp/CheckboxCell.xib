@@ -14,7 +14,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzq-A4-gvf">
-                        <rect key="frame" x="14" y="11" width="42" height="21"/>
+                        <rect key="frame" x="14" y="-1" width="42" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="ShF-pW-hEu"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -36,14 +39,22 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="tzq-A4-gvf" secondAttribute="centerY" id="59J-Z4-Fhg"/>
+                    <constraint firstItem="tzq-A4-gvf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="750" id="7cx-pX-IQk"/>
                     <constraint firstAttribute="trailing" secondItem="hlr-KF-AQx" secondAttribute="trailing" constant="14" id="Pxk-Nb-M4n"/>
                     <constraint firstAttribute="bottom" secondItem="hlr-KF-AQx" secondAttribute="bottom" priority="999" constant="6" id="VQX-de-4Ay"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tzq-A4-gvf" secondAttribute="bottom" constant="6" id="Zwf-Tx-SKm"/>
+                    <constraint firstItem="tzq-A4-gvf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="aVg-Q7-PCV"/>
                     <constraint firstItem="tzq-A4-gvf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="eIU-pQ-X7r"/>
+                    <constraint firstAttribute="bottom" secondItem="tzq-A4-gvf" secondAttribute="bottom" priority="750" id="oX4-Ml-qtC"/>
                     <constraint firstItem="hlr-KF-AQx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="t1d-rf-M8t"/>
                     <constraint firstItem="hlr-KF-AQx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="uXj-ff-Dp5"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="7cx-pX-IQk"/>
+                        <exclude reference="Zwf-Tx-SKm"/>
+                        <exclude reference="aVg-Q7-PCV"/>
+                        <exclude reference="oX4-Ml-qtC"/>
                         <exclude reference="t1d-rf-M8t"/>
                     </mask>
                 </variation>

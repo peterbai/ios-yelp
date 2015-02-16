@@ -62,6 +62,8 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.estimatedRowHeight = 44;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SwitchCell" bundle:nil]
          forCellReuseIdentifier:@"SwitchCell"];
