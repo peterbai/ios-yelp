@@ -17,7 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, strong) NSString *searchTerm;
+
 
 @end
 
@@ -29,10 +29,7 @@
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] locationManager] requestWhenInUseAuthorization];
     
     // Customize navigation bar
-    self.navigationItem.leftBarButtonItem =
-    [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(onFilterButton)];
-    self.navigationItem.rightBarButtonItem =
-    [[UIBarButtonItem alloc] initWithTitle:@"List" style:UIBarButtonItemStylePlain target:self action:@selector(onListButton)];
+    [self setMainNavigationBarItems];
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 210.0, 44.0)];
     self.searchBar.tintColor = [UIColor colorWithRed:57.0/255
@@ -41,8 +38,8 @@
                                                alpha:1.0];
     self.searchBar.backgroundImage = [UIImage new];
     self.searchBar.delegate = self;
+    self.searchBar.text = self.searchTerm;
     self.navigationItem.titleView = self.searchBar;
-
     
     self.mapView.delegate = self;
     [self gotoLocation];
@@ -114,11 +111,31 @@
 
 - (void)filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
     NSLog(@"mapviewcontroller received method call from filtersviewcontroller");
-    [self.delegate mapViewController:self search:@"Restaurants" inRegion:self.mapView.region];
+    [self.delegate mapViewController:self search:@"Restaurants" withFilters:filters inRegion:self.mapView.region];
 }
 
 #pragma mark Searchbar delegate methods
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [self setSearchNavigationBarItems];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.searchTerm = searchText;
+    [self.delegate mapViewController:self setSearchTerm:searchText];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.delegate mapViewController:self search:self.searchTerm withFilters:nil inRegion:self.mapView.region];
+    [self.searchBar resignFirstResponder];
+    [self setMainNavigationBarItems];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.searchBar resignFirstResponder];
+    [self setMainNavigationBarItems];
+}
 
 #pragma mark Private methods
 
@@ -130,10 +147,28 @@
 }
 
 - (void)onSearchButton {
-    [self.delegate mapViewController:self search:self.searchTerm inRegion:self.mapView.region];
+    [self.delegate mapViewController:self search:self.searchTerm withFilters:nil inRegion:self.mapView.region];
 }
 
 - (void)onListButton{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)setMainNavigationBarItems {
+    self.navigationItem.leftBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(onFilterButton)];
+    self.navigationItem.rightBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@"List" style:UIBarButtonItemStylePlain target:self action:@selector(onListButton)];
+}
+
+- (void)setSearchNavigationBarItems {
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(searchBarCancelButtonClicked:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search"
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(searchBarSearchButtonClicked:)];
 }
 @end

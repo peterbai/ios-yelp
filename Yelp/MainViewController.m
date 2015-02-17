@@ -68,7 +68,6 @@ UIGestureRecognizerDelegate>
         
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
         
-
         self.animationController = [[CETurnAnimationController alloc] init];
         self.interactionController = [[CEHorizontalSwipeInteractionController alloc] init];
     }
@@ -115,6 +114,7 @@ UIGestureRecognizerDelegate>
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.delegate = self;
     
+    // Set up search bar
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 210.0, 44.0)];
     self.searchBar.tintColor = [UIColor colorWithRed:57.0/255
                                           green:64.0/255
@@ -122,6 +122,7 @@ UIGestureRecognizerDelegate>
                                           alpha:1.0];
     self.searchBar.backgroundImage = [UIImage new];
     self.searchBar.delegate = self;
+    self.searchBar.text = self.searchTerm;
     self.navigationItem.titleView = self.searchBar;
 }
 
@@ -135,10 +136,19 @@ UIGestureRecognizerDelegate>
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+    self.searchBar.text = self.searchTerm;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Custom getters
@@ -183,9 +193,13 @@ UIGestureRecognizerDelegate>
 
 #pragma mark MapViewDelegate methods
 
-- (void)mapViewController:(MapViewController *)mvc search:(NSString *)query inRegion:(MKCoordinateRegion)region {
+- (void)mapViewController:(MapViewController *)mvc search:(NSString *)query withFilters:(NSDictionary *)filters inRegion:(MKCoordinateRegion)region{
     NSLog(@"Mapviewcontroller called for search");
-    [self fetchBusinessesWithQuery:query params:nil];
+    [self fetchBusinessesWithQuery:query params:filters showProgress:YES append:NO];
+}
+
+- (void)mapViewController:(MapViewController *)mvc setSearchTerm:(NSString *)searchTerm {
+    self.searchTerm = searchTerm;
 }
 
 #pragma mark UINavigationController delegate methods
@@ -218,8 +232,10 @@ UIGestureRecognizerDelegate>
 
 - (void)onMapButton {
     MapViewController *mvc = [[MapViewController alloc] init];
+    mvc.searchTerm = self.searchTerm;
     mvc.businesses = self.businesses;
     mvc.region = self.region;
+    mvc.delegate = self;
     
     [self.navigationController pushViewController:mvc animated:YES];
 }
@@ -263,7 +279,7 @@ UIGestureRecognizerDelegate>
     NSLog(@"Searching for: \"%@\", with params: %@", query, params);
     
     [self.client searchWithTerm:query params:params success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"response: %@", response);
+//        NSLog(@"response: %@", response);
         NSArray *businessDictionaries = response[@"businesses"];
         self.region = response[@"region"];
         
@@ -280,6 +296,8 @@ UIGestureRecognizerDelegate>
         [self.tableView reloadData];
         [SVProgressHUD dismiss];
         [self.tableView.infiniteScrollingView stopAnimating];
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error: %@", [error description]);

@@ -13,7 +13,8 @@
 
 @protocol MapViewControllerDelegate <NSObject>
 
-- (void)mapViewController:(MapViewController *)mvc search:(NSString *)query inRegion:(MKCoordinateRegion)region;
+- (void)mapViewController:(MapViewController *)mvc search:(NSString *)query withFilters:(NSDictionary *)filters inRegion:(MKCoordinateRegion)region;
+- (void)mapViewController:(MapViewController *)mvc setSearchTerm:(NSString *)searchTerm;
 
 @end
 
@@ -21,6 +22,7 @@
 
 @property (nonatomic, strong) NSArray *businesses;
 @property (nonatomic, strong) NSDictionary *region;
+@property (nonatomic, strong) NSString *searchTerm;
 
 @property (nonatomic, weak) id<MapViewControllerDelegate> delegate;
 
