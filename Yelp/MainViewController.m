@@ -191,7 +191,7 @@ UIGestureRecognizerDelegate>
     [self setMainNavigationBarItems];
 }
 
-#pragma mark MapViewDelegate methods
+#pragma mark MapViewControllerDelegate methods
 
 - (void)mapViewController:(MapViewController *)mvc search:(NSString *)query withFilters:(NSDictionary *)filters inRegion:(MKCoordinateRegion)region{
     NSLog(@"Mapviewcontroller called for search");
@@ -200,6 +200,14 @@ UIGestureRecognizerDelegate>
 
 - (void)mapViewController:(MapViewController *)mvc setSearchTerm:(NSString *)searchTerm {
     self.searchTerm = searchTerm;
+}
+
+- (NSArray *)businessesForMapViewController:(MapViewController *)mvc {
+    return self.businesses;
+}
+
+- (NSDictionary *)mapRegionForMapViewController:(MapViewController *)mvc {
+    return self.region;
 }
 
 #pragma mark UINavigationController delegate methods
@@ -297,7 +305,7 @@ UIGestureRecognizerDelegate>
         [SVProgressHUD dismiss];
         [self.tableView.infiniteScrollingView stopAnimating];
         
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchCompleteNotification" object:self];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error: %@", [error description]);

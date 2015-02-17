@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "CPBusiness.h"
 
 @class MapViewController;
 
@@ -15,6 +16,8 @@
 
 - (void)mapViewController:(MapViewController *)mvc search:(NSString *)query withFilters:(NSDictionary *)filters inRegion:(MKCoordinateRegion)region;
 - (void)mapViewController:(MapViewController *)mvc setSearchTerm:(NSString *)searchTerm;
+- (NSArray *)businessesForMapViewController:(MapViewController *)mvc;
+- (NSDictionary *)mapRegionForMapViewController:(MapViewController *)mvc;
 
 @end
 

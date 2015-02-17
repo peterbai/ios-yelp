@@ -44,6 +44,12 @@
     self.mapView.delegate = self;
     [self gotoLocation];
     [self addAnnotations];
+    
+    // Subscribe to search update
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveSearchCompleteNotification:)
+                                                 name:@"SearchCompleteNotification"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,6 +60,8 @@
 #pragma mark Mapping methods
 
 - (void)addAnnotations {
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
     for (CPBusiness *business in self.businesses) {
 //        NSLog(@"lat: %f, long: %f", business.locationLatitude, business.locationLongitude);
         
@@ -170,5 +178,18 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(searchBarSearchButtonClicked:)];
+}
+
+- (void)receiveSearchCompleteNotification:(NSNotification *)notification {
+    NSLog(@"received notification: %@", notification);
+    
+    if ([[notification name] isEqualToString:@"SearchCompleteNotification"]) {
+        NSLog(@"received notification to update mapview");
+        
+        self.businesses = [self.delegate businessesForMapViewController:self];
+        self.region = [self.delegate mapRegionForMapViewController:self];
+        [self gotoLocation];
+        [self addAnnotations];
+    }
 }
 @end
