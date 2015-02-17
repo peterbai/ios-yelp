@@ -330,6 +330,9 @@ UIGestureRecognizerDelegate>
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.searchBar resignFirstResponder];
+    [self setMainNavigationBarItems];
+    
     DetailViewController *dvc = [[DetailViewController alloc] init];
     dvc.business = self.businesses[indexPath.row];
     [self.navigationController pushViewController:dvc animated:YES];

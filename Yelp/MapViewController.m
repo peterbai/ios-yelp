@@ -111,7 +111,7 @@
 
 - (void)filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
     NSLog(@"mapviewcontroller received method call from filtersviewcontroller");
-    [self.delegate mapViewController:self search:@"Restaurants" withFilters:filters inRegion:self.mapView.region];
+    [self.delegate mapViewController:self search:self.searchTerm withFilters:filters inRegion:self.mapView.region];
 }
 
 #pragma mark Searchbar delegate methods
